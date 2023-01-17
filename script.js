@@ -1,20 +1,22 @@
 class Token {
-    constructor(color) {
+    constructor(color, column, row) {
         this.color = color
+        this.column = column
+        this.row = row
     }
 }
 
 class Grid {
     constructor() {
-        this.size = { x: 7, y: 6 }
+        this.size = { columns: 7, rows: 6 }
         this.tokens = this.empty()
     }
 
     empty = () => {
         const columns = []
-        for (let i = 0; i < this.size.x; i ++) {
+        for (let i = 0; i < this.size.rows; i ++) {
             columns[i] = []
-            for (let j = 0; j < this.size.y; j ++) {
+            for (let j = 0; j < this.size.columns; j ++) {
                 columns[i].push(null)
             }
         }
