@@ -24,9 +24,11 @@ class Grid {
     }
 
     addToken(token, column) {
-        let row = this.tokens[column].reverse().findIndex(t => t === null)
-        row = this.size.y - row - 1
+        let row = this.tokens[column].reverse().findIndex(token => token === null)
+        row = this.size.rows - row - 1
         if (row !== -1) {
+            token.column=column
+            token.row=row
             this.tokens[column][row] = token
         }
     }
