@@ -53,3 +53,8 @@ class GameManager {
     }
 }
 
+function runApplication() {
+    new GameManager()
+}
+
+runApplication()
