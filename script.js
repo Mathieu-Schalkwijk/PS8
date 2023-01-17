@@ -14,9 +14,9 @@ class Grid {
 
     empty = () => {
         const columns = []
-        for (let i = 0; i < this.size.rows; i ++) {
+        for (let i = 0; i < this.size.columns; i ++) {
             columns[i] = []
-            for (let j = 0; j < this.size.columns; j ++) {
+            for (let j = 0; j < this.size.rows; j ++) {
                 columns[i].push(null)
             }
         }
@@ -35,3 +35,19 @@ class Grid {
         return this.tokens[column].findIndex(t => t === null) !== -1
     }
 }
+
+class GameManager {
+    constructor() {
+        this.grid = new Grid()
+        this.player = 'red'
+    }
+
+    addToken(column) {
+        if (this.grid.canAddToken(column)) {
+            const token = new Token(this.player, column, 0)
+            this.grid.addToken(token, column)
+            this.player = this.player === 'red' ? 'yellow' : 'red'
+        }
+    }
+}
+
