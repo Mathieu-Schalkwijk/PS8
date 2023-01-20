@@ -88,6 +88,7 @@ hr {
 
 .game-container {
     display: flex;
+    flex-direction: column;
     position: relative;
     height: 310px;
     width: 360px;
@@ -127,6 +128,45 @@ hr {
     margin-top: 10px;
     margin-left: 10px;
     z-index: 2;
+}
+
+.column-choice {
+    display: flex;
+    width: 360px;
+    height: 70px;
+    position: relative;
+    cursor: pointer;
+    touch-action: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.column-choice .token.column-1 {
+    transform: translate(0, 0);
+}
+
+.column-choice .token.column-2 {
+    transform: translate(50px, 0);
+}
+
+.column-choice .token.column-3 {
+    transform: translate(100px, 0);
+}
+
+.column-choice .token.column-4 {
+    transform: translate(150px, 0);
+}
+
+.column-choice .token.column-5 {
+    transform: translate(200px, 0);
+}
+
+.column-choice .token.column-6 {
+    transform: translate(250px, 0);
+}
+
+.column-choice .token.column-7 {
+    transform: translate(300px, 0);
 }
 
 .token {
