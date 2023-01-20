@@ -1,0 +1,133 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+
+.container-fluid {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.header-container {
+  display: flex;
+  background-color: #F1F1F1;
+  width: 100%;
+  height: 10%;
+}
+
+.header-container a:hover {
+  text-decoration: none;
+}
+
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 70%;
+  padding-left: 5%;
+}
+
+.title-container label {
+  font-size: 36px;
+  color: #545454;
+}
+
+.header-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.header-menu-container a {
+  padding-left: 20px;
+  color: #545454;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.header-menu-container:hover {
+  cursor: pointer;
+}
+
+.header-menu-container:hover a {
+  color: #0B4F6C;
+}
+
+.header-menu-container:hover .fa-right-to-bracket {
+  color: #0B4F6C;
+}
+
+
+.fa-right-to-bracket {
+  color: #545454;
+  font-size: 30px;
+}
+
+
+#logo {
+  width: 170px;
+  height: 75px;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.center-container {
+  display: block;
+  width: 25%;
+  height: 20%;
+  margin-bottom: 10%;
+}
+
+.button-container {
+  display: flex;
+  height: 50%;
+}
+
+.button-container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 55px;
+  border: none;
+  font-size: 36px;
+  background-color: #D9D9D9;
+}
+
+.button-container button:hover {
+  cursor: pointer;
+  background-color: #F1F1F1;
+}
+
+.fa-desktop {
+  margin-right: 20px;
+  font-size: 30px;
+}
+
+.center-container a {
+  display: flex;
+  padding-top: 20px;
+  justify-content: center;
+  font-size: 24px;
+  color: #0B4F6C;
+}
+
+
+
+
