@@ -1,0 +1,201 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.container-fluid {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.header-container {
+    display: flex;
+    width: 100%;
+    height: 15%;
+}
+
+.save-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+
+.save-button-container i {
+    color: #94979F;
+    font-size: 70px;
+}
+
+.save-button-container i:hover {
+    color: #4A4C52;
+    cursor: pointer;
+}
+
+
+.time-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.time-container i {
+    color: #94979F;
+    font-size: 70px;
+    margin-right: 15px;
+}
+
+.time-container label {
+    color: #94979F;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+
+.settings-container i {
+    color: #94979F;
+    font-size: 70px;
+}
+
+.settings-container i:hover {
+    color: #4A4C52;
+    cursor: pointer;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85%;
+    padding-top: 4%;
+}
+
+.player1-container {
+    display: block;
+    width: 30%;
+    height: 100%;
+}
+
+.turn-label-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2%;
+}
+
+.turn-label-container label {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+#player1-turn-label {
+    color: #B80C09;
+}
+
+.player-pic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+}
+
+.player-pic-container button {
+    width: 155px;
+    height: 155px;
+    border-radius: 100px;
+    background-color: #D9D9D9;
+}
+
+#player1-pic-container button {
+    border: solid #B80C09 10px;
+}
+
+.player-pic-container button i {
+    font-size: 90px;
+    color: #4A4C52;
+}
+
+.player-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5%;
+}
+
+.player-name-container label {
+    color: #94979F;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.player-score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.player-score-container label {
+    color: #94979F;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.game-container {
+    width: 40%;
+    height: 100%;
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 65%;
+    margin-bottom: 10%;
+}
+
+.board-container img {
+    width: 100%;
+    height: 100%;
+    /*width: 770px;
+    height: 600px;*/
+}
+
+.board-container img:hover {
+    cursor: pointer;
+}
+
+.player2-container {
+    display: block;
+    width: 30%;
+    height: 100%;
+}
+
+#player2-pic-container button {
+    border: solid #0B4F6C 10px;
+}
+
+#player2-turn-label {
+    color: #0B4F6C;
+}
