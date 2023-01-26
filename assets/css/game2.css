@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -81,23 +82,28 @@ body {
 .main-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 85%;
-    padding-top: 4%;
+    justify-content: space-around;
+    margin-top: 100px;
 }
 
-.player1-container {
-    display: block;
-    width: 30%;
-    height: 100%;
+.player-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .turn-label-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 2%;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.player1 .turn-label-container {
+    color: #B80C09;
+}
+
+.player2 .turn-label-container {
+    color: #0C7EB8;
 }
 
 .turn-label-container label {
@@ -134,11 +140,9 @@ body {
 }
 
 .player-name-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 5%;
+    font-size: 1.2em;
+    margin-top: 1em;
+    margin-bottom: .7em;
 }
 
 .player-name-container label {
@@ -148,11 +152,7 @@ body {
 }
 
 .player-score-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 10%;
+    font-size: 2.5em;
 }
 
 .player-score-container label {
@@ -163,10 +163,91 @@ body {
 
 .game-container {
     display: flex;
-    justify-content: center;
-    width: 40%;
-    height: 100%;
+    flex-direction: column;
+    position: relative;
+    height: 310px;
+    width: 360px;
+    border-radius: 6px;
 }
+
+.grid-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+}
+
+#grid-fill {
+    z-index: 2;
+}
+
+.token-container {
+    display: flex;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    z-index: 1;
+}
+
+.token-container .column {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+}
+
+.token-container .column .regular:nth-child(1) {
+    transform: translate(0px, calc(50px * 5));
+}
+
+.token-container .column .regular:nth-child(2) {
+    transform: translate(0px, calc(50px * 4));
+}
+
+.token-container .column .regular:nth-child(3) {
+    transform: translate(0px, calc(50px * 3));
+}
+
+.token-container .column .regular:nth-child(4) {
+    transform: translate(0px, calc(50px * 2));
+}
+
+.token-container .column .regular:nth-child(5) {
+    transform: translate(0px, calc(50px * 1));
+}
+
+.token-container .column .regular:nth-child(6) {
+    transform: translate(0px, 0px);
+}
+
+
+.token.column-choice {
+    transform: translate(0, -70px);
+}
+
+.token {
+    width: 40px;
+    height: 40px;
+}
+
+.token {
+    position: absolute;
+    -webkit-transition: 100ms ease-in-out;
+    -moz-transition: 100ms ease-in-out;
+    transition: 100ms ease-in-out;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    border-radius: 50%;
+}
+
+.token.token-red {
+    background: #B80C09;
+}
+
+.token.token-yellow {
+    background: #E3C920;
+}
+
 
 .board-container {
     display: flex;
