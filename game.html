@@ -2,29 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="assets/css/game.css" rel="stylesheet" type="text/css">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css"> <!-- Lien font-awesome -->
+    <link rel="stylesheet" href="assets/css/game.css">
+
+    <title>Puissance 4</title>
 </head>
 <body>
-<div class="game-container">
-    <img id="grid-fill" src="assets/imgs/connect4board.png" alt="connect 4"/>
+<div class="container-fluid">
+    <!-- Container de l'en-tête de page -->
+    <div class="header-container">
+        <div class="save-button-container">
+            <i class="fa-solid fa-floppy-disk"></i>
+        </div>
+        <div class="time-container">
+            <i class="fa-solid fa-clock"></i>
+            <label id="turn-time-label">00:40</label>
+        </div>
+        <div class="settings-container">
+            <i class="fas fa-right-from-bracket" onclick="window.location.href='./index.html'"></i>
+        </div>
+    </div>
 
-    <div class="token-container">
-        <div class="column column-1">
+    <div class="main-container">
+        <div class="player1 player-container">
+            <div class="turn-label-container">Your turn</div>
+            <div id="player1-pic-container" class="player-pic-container">
+                <button>
+                    <i id="player1-pic" class="fa-solid fa-user"></i>
+                </button>
+            </div>
+            <div class="player-name-container">Player 1</div>
+            <div class="player-score-container">0</div>
+        </div>
+        <div class="game-container">
+            <img id="grid-fill" src="assets/imgs/connect4board.png" alt="connect 4"/>
 
+            <div class="token-container">
+                <div class="column column-1"></div>
+                <div class="column column-2">
+                    <div class="token regular token-red"></div>
+                </div>
+                <div class="column column-3">
+                    <div class="token column-choice token-red"></div>
+                </div>
+                <div class="column column-4"></div>
+                <div class="column column-5"></div>
+                <div class="column column-6"></div>
+                <div class="column column-7"></div>
+            </div>
         </div>
-        <div class="column column-2">
-            <div class="token regular token-red"></div>
+        <div class="player2 player-container">
+            <div class="turn-label-container"></div>
+            <div id="player2-pic-container" class="player-pic-container">
+                <button>
+                    <i id="player2-pic" class="fa-solid fa-user"></i>
+                </button>
+            </div>
+            <div class="player-name-container">Player 2</div>
+            <div class="player-score-container">0</div>
         </div>
-        <div class="column column-3">
-            <div class="token column-choice token-red"></div>
-        </div>
-        <div class="column column-4"></div>
-        <div class="column column-5"></div>
-        <div class="column column-6"></div>
-        <div class="column column-7"></div>
     </div>
 </div>
-
 </body>
 </html>
