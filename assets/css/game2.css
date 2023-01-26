@@ -93,6 +93,7 @@ body {
 }
 
 .turn-label-container {
+    height: 2rem;
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 1rem;
@@ -109,10 +110,6 @@ body {
 .turn-label-container label {
     font-size: 48px;
     font-weight: 800;
-}
-
-#player1-turn-label {
-    color: #B80C09;
 }
 
 .player-pic-container {
