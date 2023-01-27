@@ -7,35 +7,118 @@ class Token {
 }
 
 class Grid {
-    constructor() {
-        this.size = { columns: 7, rows: 6 }
+    constructor(uiUpdater) {
+        this.size = {columns: 7, rows: 6}
         this.tokens = this.empty()
+        this.uiUpdater = uiUpdater
     }
 
     empty = () => {
         const columns = []
-        for (let i = 0; i < this.size.columns; i ++) {
+        for (let i = 0; i < this.size.columns; i++) {
             columns[i] = []
-            for (let j = 0; j < this.size.rows; j ++) {
+            for (let j = 0; j < this.size.rows; j++) {
                 columns[i].push(null)
             }
         }
         return columns
     }
 
+    /**
+     * Add a token to the grid without verifying if the column is full
+     * Call the uiupdater
+     * Call the ckeckForWin
+     * @param token
+     * @param column
+     */
     addToken(token, column) {
-        let row = this.tokens[column].reverse().findIndex(token => token === null)
-        row = this.size.rows - row - 1
+        let row = this.size.rows - 1
+        while (this.tokens[column][row] !== null) {
+            row--
+        }
         if (row !== -1) {
-            token.column=column
-            token.row=row
+            token.column = column
+            token.row = row
             this.tokens[column][row] = token
+            this.uiUpdater.addToken(token)
+            if (this.checkForWin(token)) {
+                console.log(token.color + ' wins!')
+            }
+            if (this.checkForDraw()) {
+                console.log('Draw!')
+            }
+        } else {
+            console.error('Cannot add token to column', column)
         }
     }
 
+    /**
+     * Check if the column is not full
+     * @param column
+     * @returns {boolean}
+     */
     canAddToken(column) {
-        return this.tokens[column].findIndex(t => t === null) !== -1
+        //TODO: check all cases
+        return this.tokens[column][0] === null;
     }
+
+    checkForDraw() {
+        for (let i = 0; i < this.size.columns; i++) {
+            if (this.canAddToken(i)) {
+                return false
+            }
+        }
+        return true
+    }
+
+    /**
+     * Check if the given token is part of a winning combination
+     * @param token the token we just added
+     * @returns {boolean} if the token complete a 4-in-a-row
+     */
+    checkForWin(token) {
+        const color = token.color
+        const directions = [
+            { x: 1, y: 0 },
+            { x: 0, y: 1 },
+            { x: 1, y: 1 },
+            { x: 1, y: -1 }
+        ]
+        for (const direction of directions) {
+            const count = this.checkDirection(token, direction)
+            if (count >= 4) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * Check the number of tokens in a given direction
+     * @param token the token we just added
+     * @param direction x and y unit values
+     * @returns {number} the number of consecutive tokens in the given direction
+     */
+    checkDirection(token, direction) {
+        let color = token.color
+        let count = 0
+        let x = token.column
+        let y = token.row
+        while (x >= 0 && x < this.size.columns && y >= 0 && y < this.size.rows && this.tokens[x][y] && this.tokens[x][y].color === color) {
+            count ++
+            x += direction.x
+            y += direction.y
+        }
+        x = token.column - direction.x
+        y = token.row - direction.y
+        while (x >= 0 && x < this.size.columns && y >= 0 && y < this.size.rows && this.tokens[x][y] && this.tokens[x][y].color === color) {
+            count ++
+            x -= direction.x
+            y -= direction.y
+        }
+        return count
+    }
+
 }
 
 class Player {
@@ -46,33 +129,7 @@ class Player {
 
 class UIUpdater {
     constructor() {
-        this.grid = new Grid()
-        this.player = new Player('red')
-        this.token = new Token(this.player.color, 0, 0)
         this.tokenContainer = document.querySelector('.token-container')
-    }
-
-    addToken = (column) => {
-        if (this.grid.canAddToken(column)) {
-            this.grid.addToken(this.token, column)
-            this.updateUI()
-        }
-    }
-
-    updateUI = () => {
-        const grid = document.getElementById('grid')
-        grid.innerHTML = ''
-        for (let i = 0; i < this.grid.size.rows; i ++) {
-            for (let j = 0; j < this.grid.size.columns; j ++) {
-                const token = this.grid.tokens[j][i]
-                const cell = document.createElement('div')
-                cell.classList.add('cell')
-                if (token) {
-                    cell.classList.add(token.color)
-                }
-                grid.appendChild(cell)
-            }
-        }
     }
 
     /**
@@ -82,53 +139,68 @@ class UIUpdater {
     addToken(token) {
         const tokenElement = document.createElement('div')
         tokenElement.classList.add('token')
-        tokenElement.classList.add(token.color)
-        tokenElement.classList.add(`token-position-${token.row+1}-${token.column+1}`)
-        this.tokenContainer.appendChild(tokenElement)
+        tokenElement.classList.add('column-choice')
+        tokenElement.classList.add('token-' + token.color)
+        let columnDiv = this.tokenContainer.children[token.column]
+        columnDiv.appendChild(tokenElement)
+        setTimeout(() => {
+            tokenElement.classList.remove('column-choice')
+            tokenElement.classList.add('regular')
+        }, 100)
     }
 }
 
-class KeyboardInputManager {
-    constructor() {
-        this.listeners = []
-        document.addEventListener('keydown', this.onKeyDown)
+class InputManager {
+    constructor(grid) {
+        this.grid = grid
+        this.columns = document.querySelectorAll('.column')
+        this.columns.forEach((column, i) => {
+            column.addEventListener('click', () => {
+                this.grid.addToken(new Token('red', i, 0), i)
+                console.log("hello")
+            })
+        })
     }
 
-    onKeyDown = (event) => {
-        if (event.keyCode >= 49 && event.keyCode <= 56) {
-            this.listeners.forEach(listener => listener(event.keyCode - 49))
-        }
-    }
-
-    subscribe(listener) {
-        this.listeners.push(listener)
-    }
-
-    unsubscribe(listener) {
-        this.listeners = this.listeners.filter(l => l !== listener)
-    }
 }
 
 class GameManager {
-    constructor(updater, inputManager) {
-        this.grid = new Grid()
-        this.players = [new Player('red'), new Player('yellow')]
+    constructor(updater, inputManager, grid, player1, player2) {
+        this.grid = grid
+        this.grid.updater = updater
+        this.players = [player1, player2]
         this.currentPlayer = this.players[0]
-        this.updater = updater
         this.inputManager = inputManager
     }
 
     addToken(player, column) {
-        if (this.grid.canAddToken(column) && player === this.currentPlayer) {
-            const token = new Token(this.currentPlayer.color, column, 0)
-            this.grid.addToken(token, column)
-            this.currentPlayer = this.currentPlayer === this.players[0] ? this.players[1] : this.players[0]
-        }
+        const token = new Token(this.currentPlayer.color, column, 0)
+        this.grid.addToken(token, column)
+        this.currentPlayer = this.currentPlayer === this.players[0] ? this.players[1] : this.players[0]
     }
+
+    start() {
+        console.log('Starting game')
+        this.columns = document.querySelectorAll('.choice')
+        this.columns.forEach((column, i) => {
+            column.addEventListener('click', () => {
+                if (this.grid.canAddToken(i)) {
+                    this.addToken(this.currentPlayer, i)
+                }
+            })
+        })
+    }
+
 }
 
 function runApplication() {
-    new GameManager(new UIUpdater(), new KeyboardInputManager())
+    const uiUpdater = new UIUpdater()
+    const grid = new Grid(uiUpdater)
+    const inputManager = new InputManager(grid)
+    const player1 = new Player('red')
+    const player2 = new Player('yellow')
+    const gameManager = new GameManager(uiUpdater, inputManager, grid, player1, player2)
+    gameManager.start()
 }
 
 runApplication()

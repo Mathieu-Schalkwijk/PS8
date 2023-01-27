@@ -161,6 +161,7 @@ body {
 .game-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: relative;
     height: 310px;
     width: 360px;
@@ -176,6 +177,7 @@ body {
 
 #grid-fill {
     z-index: 2;
+    user-select: none;
 }
 
 .token-container {
@@ -216,6 +218,22 @@ body {
     transform: translate(0px, 0px);
 }
 
+.hover-container {
+    display: flex;
+    position: absolute;
+    z-index: 3;
+    height: 100%;
+}
+
+.choice:hover {
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.hover-container .choice {
+    width: 50px;
+}
 
 .token.column-choice {
     transform: translate(0, -70px);
